@@ -1,0 +1,103 @@
+@font-face {
+    font-family: sevenSegments;
+    src: url(./Seven\ Segment.ttf);
+}
+
+* {
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #e8e8e8;
+    /*? background: #3C4048; */
+}
+
+/**--------------------------------------Screen*/
+h1 {
+    
+    background-color: #e8e8e8;
+    padding: 10px;
+    border-radius: 8pc;
+    font-family: sevenSegments;
+    transition: all .3s;
+    box-shadow: 6px 6px 10px #c5c5c5,
+                -6px -6px 10px #ffffff;
+}
+
+.screen {
+    text-align: end;
+    width: 50vw;
+    font-size: larger;
+    height: 50px;
+}
+
+/**---------------------------------Container Buttons*/
+.containerButtons {
+    width: 50vw;
+    margin-top: 50px;
+    color: #ffffff;
+    display: grid;
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.containerButtons #\= {
+    grid-column: span 2;
+}
+
+/**---------------------------------Buttons Colors*/
+a {
+    text-align: center;
+    color: #e8e8e8;
+    padding: 0.7em 1.7em;
+    font-size: x-large;
+    border-radius: 1.5em;
+    /* background: #e8e8e8; */
+    background: #015768b2;
+    border: 1px solid #e8e8e8;
+    transition: all .3s;
+    box-shadow: 6px 6px 10px #c5c5c5,
+                -6px -6px 10px #ffffff;
+}
+
+a:hover { 
+    border: 1.5px solid white;
+    cursor: pointer;
+}
+
+a:active {
+    box-shadow: 4px 4px 12px #c5c5c5,
+            -4px -4px 12px #ffffff;
+}
+
+.containerButtons .caution {
+    background: #FFD369;
+    color: #015668;
+}
+
+.containerButtons .op {
+    background: #FFF1CF;
+    color: #015668;
+}
+
+
+
+/**------------------------------------Media*/
+@media (max-width:600px) {
+    .screen {
+        width: 60vw;
+    }
+}
+
+@media (max-width:420px) {
+    body {
+        align-items: flex-start;
+    }
+
+    .screen {
+        width: 90vw;
+    }
+}
