@@ -16,7 +16,10 @@ function calculation() {
     if (num.includes('+')) {
         num = num.split('+');
         sum(num);
-    } else if (num.includes('×')) {
+    }else if (num.includes('√')) {
+        num = num.split('√');
+        sr(num)
+    }else if (num.includes('×')) {
         num = num.split('×');
         mul(num)
     }
@@ -43,6 +46,17 @@ function sum(num) {
         res += aux
     }
     screenElm.innerHTML = res
+}
+
+function sr(num) {
+    let res = num;
+    console.log('res',res[1])
+
+    screenElm.innerHTML = `√${res[1]}`
+    setTimeout(function(){
+        res = Math.sqrt(res[1])
+        screenElm.innerHTML = res
+    }, 600);
 }
 
 function mul(num) {
