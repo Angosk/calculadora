@@ -85,7 +85,7 @@ function div(num) {
 
 function per(num) {
     let res = (num[1] * num[0]) / 100
-    screenOpe.innerHTML = `${num[0]} % ${num[1]}`
+    screenOpe.innerHTML = `${num[0]} % ${num[1]} =`
     screenElm.innerHTML = res
 }
 
