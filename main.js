@@ -1,4 +1,5 @@
 const screenElm = document.getElementById('screen')
+const screenOpe = document.getElementById('operation')
 const keysElms = document.getElementsByClassName('keys')
 
 function printNumber(num) {
@@ -33,16 +34,26 @@ function calculation() {
     }else if (num.includes('-')) {
         num = num.split('-');
         subs(num)
+    }else {
+        //TODO  add re calculation 
+        cls()
+        clsOpe()
     }
     console.log(num)
 }
 
 function sum(num) {
+    clsOpe()
     let res = 0;
     let aux;
     for (let i = 0; i < num.length; i++) {
         aux = Number.parseFloat(num[i]);
         res += aux
+        if(i == num.length - 1){
+            screenOpe.innerHTML += ` ${num[i]} =`
+        }else{
+            screenOpe.innerHTML += ` ${num[i]} +`
+        }  
     }
     screenElm.innerHTML = res
 }
@@ -53,6 +64,11 @@ function mul(num) {
     for (let i = 0; i < num.length; i++) {
         aux = Number.parseFloat(num[i]);
         res *= aux
+        if(i == num.length - 1){
+            screenOpe.innerHTML += ` ${num[i]} =`
+        }else{
+            screenOpe.innerHTML += ` ${num[i]} ×`
+        }  
     }
     screenElm.innerHTML = res
 }
@@ -63,10 +79,17 @@ function div(num) {
     for (let i = 0; i < num.length; i++) {
         if (i == 0) {
             res = Number.parseFloat(num[i]);
+            screenOpe.innerHTML += ` ${num[i]} ÷`
             continue;
         }
         aux = Number.parseFloat(num[i]);
         res = res / aux;
+
+        if(i == num.length - 1){
+            screenOpe.innerHTML += ` ${num[i]} =`
+        }else{
+            screenOpe.innerHTML += ` ${num[i]} ÷`
+        } 
     }
     screenElm.innerHTML = res
 }
@@ -98,13 +121,10 @@ function subs(num) {
 
 function sr(num) {
     let res = num;
-    console.log('res',res[1])
-
-    screenElm.innerHTML = `√${res[1]}`
-    setTimeout(function(){
-        res = Math.sqrt(res[1])
-        screenElm.innerHTML = res
-    }, 600);
+    console.log('res',typeof res[1])
+    screenOpe.innerHTML = `√${res[1]}`
+    res = Math.sqrt(Number.parseFloat(res))
+    screenElm.innerHTML = res
 }
 
 function del() {
@@ -120,4 +140,9 @@ function del() {
 
 function cls() {
     screenElm.innerHTML = '0'
+    screenOpe.innerHTML = ''
+}
+
+function clsOpe() {
+    screenOpe.innerHTML = ''
 }
