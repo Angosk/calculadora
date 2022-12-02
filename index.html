@@ -11,36 +11,39 @@
     <title>Calculator</title>
 </head>
 <body>
-    <div class="screen">
-        <h1 id="screen">0</h1>
+    <div class="mainBox">
+        <div class="screen">
+            <h1 id="screen">0</h1>
+        </div>
+        <div class="containerButtons">
+            <a id="Del" class="keys caution" onclick="del()"><i class="	fas fa-eraser"></i></a>
+            <a id="cls" class="keys caution" onclick="cls()"><i class="fas fa-trash-alt"></i></a>
+            <a id="%" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-percentage"></i></a> 
+            <a id="√" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-square-root-alt"></i></a>
+    
+            <a id="7" class="keys" onclick="printNumber(this.id)">7</a>
+            <a id="8" class="keys" onclick="printNumber(this.id)">8</a>
+            <a id="9" class="keys" onclick="printNumber(this.id)">9</a>
+            <a id="÷" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-divide"></i></a>
+    
+            <a id="4" class="keys" onclick="printNumber(this.id)">4</a>
+            <a id="5" class="keys" onclick="printNumber(this.id)">5</a>
+            <a id="6" class="keys" onclick="printNumber(this.id)">6</a>        
+            <a id="×" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-times"></i></a>
+    
+            <a id="1" class="keys" onclick="printNumber(this.id)">1</a>
+            <a id="2" class="keys" onclick="printNumber(this.id)">2</a>
+            <a id="3" class="keys" onclick="printNumber(this.id)">3</a>
+            <a id="-" class="keys op" onclick="printNumber(this.id)"><i class="fa fa-minus"></i></a>
+    
+            <a id="=" class="keys caution" onclick="calculation()"><i class="fas fa-equals"></i></a>
+            <a id="0" class="keys" onclick="printNumber(this.id)">0</a>
+            <a id="." class="keys" onclick="printNumber(this.id)">.</a>
+            <a id="+" class="keys op" onclick="printNumber(this.id)"><i class="fa fa-plus"></i></a>
+            
+        </div>
     </div>
-    <div class="containerButtons">
-        <a id="Del" class="keys caution" onclick="del()"><i class="	fas fa-eraser"></i></a>
-        <a id="cls" class="keys caution" onclick="cls()"><i class="fas fa-trash-alt"></i></a>
-        <a id="%" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-percentage"></i></a> 
-        <a id="√" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-square-root-alt"></i></a>
-
-        <a id="7" class="keys" onclick="printNumber(this.id)">7</a>
-        <a id="8" class="keys" onclick="printNumber(this.id)">8</a>
-        <a id="9" class="keys" onclick="printNumber(this.id)">9</a>
-        <a id="÷" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-divide"></i></a>
-
-        <a id="4" class="keys" onclick="printNumber(this.id)">4</a>
-        <a id="5" class="keys" onclick="printNumber(this.id)">5</a>
-        <a id="6" class="keys" onclick="printNumber(this.id)">6</a>        
-        <a id="×" class="keys op" onclick="printNumber(this.id)"><i class="fas fa-times"></i></a>
-
-        <a id="1" class="keys" onclick="printNumber(this.id)">1</a>
-        <a id="2" class="keys" onclick="printNumber(this.id)">2</a>
-        <a id="3" class="keys" onclick="printNumber(this.id)">3</a>
-        <a id="-" class="keys op" onclick="printNumber(this.id)"><i class="fa fa-minus"></i></a>
-
-        <a id="=" class="keys caution" onclick="calculation()"><i class="fas fa-equals"></i></a>
-        <a id="0" class="keys" onclick="printNumber(this.id)">0</a>
-        <a id="." class="keys" onclick="printNumber(this.id)">.</a>
-        <a id="+" class="keys op" onclick="printNumber(this.id)"><i class="fa fa-plus"></i></a>
-        
-    </div>
+    
     
 </body>
 <!--*Custom js-->

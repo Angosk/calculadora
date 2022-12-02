@@ -11,13 +11,21 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-end;
     background: #e8e8e8;
-    /*? background: #3C4048; */
+    height: 96vh;
 }
+
+/* .mainBox {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: #e8e8e8;
+}*/ /*? background: #3C4048; */
 
 /**--------------------------------------Screen*/
 h1 {
-    
     background-color: #e8e8e8;
     padding: 10px;
     border-radius: 8pc;
@@ -29,14 +37,14 @@ h1 {
 
 .screen {
     text-align: end;
-    width: 50vw;
+    width: 90vw;
     font-size: larger;
     height: 50px;
 }
 
 /**---------------------------------Container Buttons*/
 .containerButtons {
-    width: 50vw;
+    width: 90vw;
     margin-top: 50px;
     color: #ffffff;
     display: grid;
@@ -48,7 +56,7 @@ h1 {
 a {
     text-align: center;
     color: #e8e8e8;
-    padding: 0.7em 1.7em;
+    padding: 0.7em 0.1em;
     font-size: x-large;
     border-radius: 1.5em;
     /* background: #e8e8e8; */
@@ -82,7 +90,7 @@ a:active {
 
 
 /**------------------------------------Media*/
-@media (max-width:600px) {
+/* @media (max-width:600px) {
     .screen {
         width: 60vw;
     }
@@ -96,4 +104,4 @@ a:active {
     .screen {
         width: 90vw;
     }
-}
+} */
