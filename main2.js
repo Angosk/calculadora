@@ -3,11 +3,7 @@ const screenOpe = document.getElementById('operation')
 const keysElms = document.getElementsByClassName('keys')
 
 function printNumber(digit) {
-    let aux = screenElm.innerText
-    if (aux === '0') {
-        screenOpe.innerHTML = 0
-        screenElm.innerHTML = digit
-    }else if (digit == '+') {
+    if (digit == '+') {
         screenOpe.innerHTML = screenElm.textContent
         operation('+')
     }else if (digit == '×') {
@@ -17,12 +13,20 @@ function printNumber(digit) {
         screenOpe.innerHTML = screenElm.textContent
         operation('÷')
     }else if (digit == '-') {
-        screenOpe.innerHTML = screenElm.textContent
-        operation('-')
+        if(!screenElm.textContent.includes('+') &&
+            !screenElm.textContent.includes('×') &&
+            !screenElm.textContent.includes('÷') &&
+            !screenElm.textContent.includes('√')) {
+            screenOpe.innerHTML = screenElm.textContent
+            operation('-')
+        }else
+            screenElm.innerHTML += digit;
+        
+    }else if (screenElm.textContent == 0){
+        screenElm.innerHTML = digit
     }else {
         screenElm.innerHTML += digit;
     }
-
 }
 
 function calculation() {
@@ -95,10 +99,16 @@ function subs(num) {
 
 function sr(num) {
     let res = num;
-    console.log('res',typeof res[1])
+    console.log('res', res[1])
     screenOpe.innerHTML = `√${res[1]}`
-    res = Math.sqrt(Number.parseFloat(res))
-    screenElm.innerHTML = res
+    if (screenElm.textContent.includes('-')){
+        res = Math.sqrt(Number.parseFloat(Math.abs(res[1])))
+        screenElm.innerHTML = `im ${res}`
+    }else{
+        res = Math.sqrt(Number.parseFloat(res[1]))
+        screenElm.innerHTML = res
+    }
+    
 }
 
 function del() {
@@ -112,12 +122,14 @@ function del() {
     }
 }
 
-function cls() {
-    screenElm.innerHTML = '0'
-}
 function operation(kind) {
     screenElm.innerHTML = kind
 }
+
+function cls() {
+    screenElm.innerHTML = '0'
+}
+
 function clsOpe() {
     screenOpe.innerHTML = '0'
 }
