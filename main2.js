@@ -1,39 +1,42 @@
-const screenElm = document.getElementById('screen')
-const screenOpe = document.getElementById('operation')
-const keysElms = document.getElementsByClassName('keys')
+const screenIntro = document.getElementById('screen')
+const screenAcumulation = document.getElementById('operation')
+const keysSelectionated = document.getElementsByClassName('keys')
 
 function printNumber(digit) {
     if (digit == '+') {
-        screenOpe.innerHTML = screenElm.textContent
+        screenAcumulation.innerHTML = screenIntro.textContent
         operation('+')
     }else if (digit == '×') {
-        screenOpe.innerHTML = screenElm.textContent
+        screenAcumulation.innerHTML = screenIntro.textContent
         operation('×')
     }else if (digit == '÷') {
-        screenOpe.innerHTML = screenElm.textContent
+        screenAcumulation.innerHTML = screenIntro.textContent
         operation('÷')
     }else if (digit == '-') {
-        if(!screenElm.textContent.includes('+') &&
-            !screenElm.textContent.includes('×') &&
-            !screenElm.textContent.includes('÷') &&
-            !screenElm.textContent.includes('√')) {
-            screenOpe.innerHTML = screenElm.textContent
+        if(
+            !screenIntro.textContent.includes('+') &&
+            !screenIntro.textContent.includes('×') &&
+            !screenIntro.textContent.includes('÷') &&
+            !screenIntro.textContent.includes('√')
+            ) {
+            screenAcumulation.innerHTML = screenIntro.textContent
             operation('-')
         }else
-            screenElm.innerHTML += digit;
+            screenIntro.innerHTML += digit;
         
-    }else if (screenElm.textContent == 0){
-        screenElm.innerHTML = digit
+    }else if (screenIntro.textContent == 0){
+        screenIntro.innerHTML = digit
     }else {
-        screenElm.innerHTML += digit;
+        screenIntro.innerHTML += digit;
     }
 }
 
 function calculation() {
-    let num = screenElm.innerText;
-    if (num.includes('+')) {
-        num = num.split('+');
-        sum(num);
+    let num = screenIntro.innerText;
+    if (num.includes('%')) {
+        // num = num.split('%');
+        // console.log(num)//!
+        per(num)
     }else if (num.includes('×')) {
         num = num.split('×');
         mul(num)
@@ -42,9 +45,9 @@ function calculation() {
         num = num.split('÷');
         div(num)
     }
-    else if (num.includes('%')) {
-        num = num.split('%');
-        per(num)
+    else if (num.includes('+')) {
+        num = num.split('+');
+        sum(num);
     }else if (num.includes('√')) {
         num = num.split('√');
         sr(num)
@@ -56,80 +59,111 @@ function calculation() {
         cls()
         clsOpe()
     }
-    console.log(num)
 }
 
 function sum(num) {
-    let fst = Number.parseFloat(screenOpe.textContent);
-    let scd = Number.parseFloat(num[1])
+    let first = Number.parseFloat(screenAcumulation.textContent);
+    let second = Number.parseFloat(num[1])
     clsOpe()
-    screenOpe.innerHTML = `${fst} + ${scd} =`
-    screenElm.innerHTML = fst + scd
+    screenAcumulation.innerHTML = `${first} + ${second} =`
+    screenIntro.innerHTML = first + second
 }
 
 function mul(num) {
-    let fst = Number.parseFloat(screenOpe.textContent);
-    let scd = Number.parseFloat(num[1])
+    let first = Number.parseFloat(screenAcumulation.textContent);
+    let second = Number.parseFloat(num[1])
     clsOpe()
-    screenOpe.innerHTML = `${fst} × ${scd} =`
-    screenElm.innerHTML = fst * scd
+    screenAcumulation.innerHTML = `${first} × ${second} =`
+    screenIntro.innerHTML = first * second
 }
 
 function div(num) {
-    let fst = Number.parseFloat(screenOpe.textContent);
-    let scd = Number.parseFloat(num[1])
+    let first = Number.parseFloat(screenAcumulation.textContent);
+    let second = Number.parseFloat(num[1])
     clsOpe()
-    screenOpe.innerHTML = `${fst} ÷ ${scd} =`
-    screenElm.innerHTML = fst / scd
+    screenAcumulation.innerHTML = `${first} ÷ ${second} =`
+    screenIntro.innerHTML = first / second
 }
 
 function per(num) {
-    let res = (num[1] * num[0]) / 100
-    screenOpe.innerHTML = `${num[0]} % ${num[1]} =`
-    screenElm.innerHTML = res
+    console.log(num, 'line 90')
+    if (num.includes('-')) {
+        num = num.split('-')
+        num = num[1].split('%')
+        //*___________________________________________________________________
+        let first = Number.parseFloat(screenAcumulation.textContent);
+        let second = Number.parseFloat(num[0])
+        screenAcumulation.innerHTML = `${first} - ${second}%${first} =`
+        res = (first * second) / 100
+        res = first - res
+        screenIntro.innerHTML = res
+        //*___________________________________________________________________
+
+        console.log("yata minus")
+        console.log(num)
+    }else if (num.includes('+')) {
+        num = num.split('+');
+        num = num[1].split('%')
+        //*___________________________________________________________________
+        let first = Number.parseFloat(screenAcumulation.textContent);
+        let second = Number.parseFloat(num[0])
+        screenAcumulation.innerHTML = `${first} + ${second}%${first} =`
+        res = (first * second) / 100
+        res = first + res
+        screenIntro.innerHTML = res
+        //*___________________________________________________________________
+        console.log("yata plus")
+        console.log(num)
+    }else{
+        num = num.split('%')
+        let res = (num[1] * num[0]) / 100
+        screenAcumulation.innerHTML = `${num[0]} % ${num[1]} =`
+        screenIntro.innerHTML = res
+    }
+    
 }
 
 function subs(num) {
-    let fst = Number.parseFloat(screenOpe.textContent);
-    let scd = Number.parseFloat(num[1])
+    let first = Number.parseFloat(screenAcumulation.textContent);
+    let second = Number.parseFloat(num[1])
     clsOpe()
-    screenOpe.innerHTML = `${fst} - ${scd} =`
-    screenElm.innerHTML = fst - scd
+    screenAcumulation.innerHTML = `${first} - ${second} =`
+    screenIntro.innerHTML = first - second
 }
 
 function sr(num) {
     let res = num;
     console.log('res', res[1])
-    screenOpe.innerHTML = `√${res[1]}`
-    if (screenElm.textContent.includes('-')){
+    screenAcumulation.innerHTML = `√${res[1]}`
+    if (screenIntro.textContent.includes('-')){
         res = Math.sqrt(Number.parseFloat(Math.abs(res[1])))
-        screenElm.innerHTML = `im ${res}`
+        screenIntro.innerHTML = `im ${res}`
     }else{
         res = Math.sqrt(Number.parseFloat(res[1]))
-        screenElm.innerHTML = res
+        screenIntro.innerHTML = res
     }
     
 }
 
 function del() {
-    let num = screenElm.innerText;
+    let num = screenIntro.innerText;
     let size = num.length
     num = num.slice(0, size - 1)
     if (num == 0) {
-        screenElm.innerHTML = '0'
+        screenIntro.innerHTML = '0'
     } else {
-        screenElm.innerHTML = num
+        screenIntro.innerHTML = num
     }
 }
 
 function operation(kind) {
-    screenElm.innerHTML = kind
+    screenIntro.innerHTML = kind
 }
 
 function cls() {
-    screenElm.innerHTML = '0'
+    screenIntro.innerHTML = '0'
 }
 
 function clsOpe() {
-    screenOpe.innerHTML = '0'
+    screenAcumulation.innerHTML = '0'
 }
