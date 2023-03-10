@@ -5,41 +5,43 @@ const screenAccumulation = document.getElementById('screenTop')
 const screenIntro = document.getElementById('screenBottom')
 
 function printNumber(digit) {
-    if (digit == '+') {
+    if (digit === '+') {
         typeOfAction('+')
-    }else if (digit == '×') {
+    }else if (digit === '×') {
         typeOfAction('×')
-    }else if (digit == '÷') {
+    }else if (digit === '÷') {
         typeOfAction('÷')
-    }else if(digit ==='%'){
+    }else if (digit === '%') {
         !(/[\×\÷\√\%]/g).test(screenIntro.textContent) ? //! review negative at the beginning
         screenIntro.innerHTML += digit : screenIntro.innerHTML = digit 
-    }else if (digit == '-') { 
+    }else if (digit === '-') { 
+        // if ((/--/g).test(screenIntro.textContent)){
+        //     //! remove --
+        // }
         //# If the " - " is used like a negative sing, it can be use only
         //# in +, x, ÷ and √
-        if(
-            screenIntro.textContent === '+' ||
-            screenIntro.textContent === '×' ||
-            screenIntro.textContent === '÷' ||
-            screenIntro.textContent === '√' 
-            ) {
+        if((/[\+\×\÷\√]/g).test(screenIntro.textContent)) {//? here could add parameters for --
             screenIntro.innerHTML += digit;
-        //# In other cases is a subtraction
         }else
             typeOfAction('-')
-    }else if (digit === '.'){
-        screenIntro.textContent == '0' ? 
-            screenIntro.textContent = '0.' :
-            (/[\+\-\×\÷\√\%\.]/g).test(screenIntro.textContent) ? screenIntro.innerHTML += '0.': null
-    }else if(digit ==='√'){
+    }else if (digit === '.') {
+        if (!screenIntro.textContent.includes('.')){
+            if(screenIntro.textContent == '0') {
+                screenIntro.textContent = '0.'
+            }else if ((/[\+\-\×\÷\√\%]/g).test(screenIntro.textContent)){
+                screenIntro.innerHTML += '0.'
+            }else {
+                screenIntro.innerHTML += digit
+            }
+        }
+    }else if (digit ==='√') {
         clsAccumulation()
         clsIntro()
         screenIntro.textContent = '√'
-    }else if(screenIntro.textContent == '0'){
+    }else if (screenIntro.textContent == '0') {
         screenIntro.textContent = digit
     }else{
         screenIntro.innerHTML += digit;
-        
     }
 }
 
