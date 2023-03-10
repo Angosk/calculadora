@@ -1,3 +1,8 @@
+
+//! -Version for multiple calculous in a line
+//! -Include some bugs of usability
+
+
 const screenElm = document.getElementById('screen')
 const screenOpe = document.getElementById('operation')
 const keysElms = document.getElementsByClassName('keys')

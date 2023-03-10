@@ -1,44 +1,83 @@
 
 //# In development!!!
 
-const screenIntro = document.getElementById('screen')
-const screenAccumulation = document.getElementById('operation')
+const screenAccumulation = document.getElementById('screenTop')
+const screenIntro = document.getElementById('screenBottom')
 
 function printNumber(digit) {
-    if (
-        digit == '+'
-        ) {
-        screenAccumulation.innerHTML = screenIntro.textContent
-        operation('+')
+    if (digit == '+') {
+        typeOfAction('+')
     }else if (digit == '×') {
-        screenAccumulation.innerHTML = screenIntro.textContent
-        operation('×')
+        typeOfAction('×')
     }else if (digit == '÷') {
-        screenAccumulation.innerHTML = screenIntro.textContent
-        operation('÷')
-    }else if (digit == '-') {
+        typeOfAction('÷')
+    }else if(digit ==='%'){
+        !(/[\×\÷\√\%]/g).test(screenIntro.textContent) ? //! review negative at the beginning
+        screenIntro.innerHTML += digit : screenIntro.innerHTML = digit 
+    }else if (digit == '-') { 
+        //# If the " - " is used like a negative sing, it can be use only
+        //# in +, x, ÷ and √
         if(
-            !screenIntro.textContent.includes('+') &&
-            !screenIntro.textContent.includes('×') &&
-            !screenIntro.textContent.includes('÷') &&
-            !screenIntro.textContent.includes('√')
+            screenIntro.textContent === '+' ||
+            screenIntro.textContent === '×' ||
+            screenIntro.textContent === '÷' ||
+            screenIntro.textContent === '√' 
             ) {
-            screenAccumulation.innerHTML = screenIntro.textContent
-            operation('-')
-        }else
             screenIntro.innerHTML += digit;
-        
-    }else if (screenIntro.textContent == 0){
-        screenIntro.innerHTML = digit
-    }else {
+        //# In other cases is a subtraction
+        }else
+            typeOfAction('-')
+    }else if (digit === '.'){
+        screenIntro.textContent == '0' ? 
+            screenIntro.textContent = '0.' :
+            (/[\+\-\×\÷\√\%\.]/g).test(screenIntro.textContent) ? screenIntro.innerHTML += '0.': null
+    }else if(digit ==='√'){
+        clsAccumulation()
+        clsIntro()
+        screenIntro.textContent = '√'
+    }else if(screenIntro.textContent == '0'){
+        screenIntro.textContent = digit
+    }else{
         screenIntro.innerHTML += digit;
+        
+    }
+}
+
+function typeOfAction (kind){
+    //# match returns an array with each element it could find 
+    //# NULL in other cases
+    const isNumber = screenIntro.textContent.match(/[0-9]/g)
+    const isOperator = screenIntro.textContent.match(/[\+\-\×\÷\√\%]/g)
+    if ((/[0-9]/g).test(screenAccumulation.textContent)) {
+        if(
+            (isOperator ===  null ? true : false) && (isNumber != null ? true : false)){
+                if(screenIntro.textContent == '0'){
+                    clsIntro()
+                    operator(kind) 
+                }else{
+                    screenAccumulation.innerHTML = screenIntro.textContent
+                    operator(kind) 
+                }
+        }else if(
+            (isOperator != null ? true : false) && (isNumber === null ? true : false)){
+            operator(kind)
+        }else if(
+            (isOperator != null ? true : false) && (isNumber != null ? true : false)){
+            calculation()
+        }else operator()
+
+    }else if (screenAccumulation.textContent.includes('=')){
+        screenAccumulation.innerHTML = screenIntro.textContent
+        operator(kind)
+    }else {
+        calculation()
     }
 }
 
 function calculation() {
     let num = screenIntro.innerText;
     if (num.includes('%')) {
-        per(num)//# .........................Each function most split if it needs
+        per(num)//# .........................Each function should be split if it need it
     }else if (num.includes('×')) {
         num = num.split('×');
         mul(num)
@@ -98,7 +137,7 @@ function per(num) {
         res = (first * second) / 100
         res = first - res
         screenIntro.innerHTML = res
-        //*____________________________________________________________________________
+        //*___________________________________________________________________^^^^^^^^
     }else if (num.includes('+')) {
         num = num.split('+');
         num = num[1].split('%')
@@ -109,7 +148,7 @@ function per(num) {
         res = (first * second) / 100
         res = first + res
         screenIntro.innerHTML = res
-        //*_____________________________________________________________________________
+        //*____________________________________________________________________^^^^^^^^
     }else{
         num = num.split('%')
         let res = (num[1] * num[0]) / 100
@@ -129,7 +168,6 @@ function subs(num) {
 
 function sr(num) {
     let res = num;
-    console.log('res', res[1])
     screenAccumulation.innerHTML = `√${res[1]}`
     if (screenIntro.textContent.includes('-')){
         res = Math.sqrt(Number.parseFloat(Math.abs(res[1])))
@@ -142,7 +180,7 @@ function sr(num) {
 }
 
 function del() {
-    let num = screenIntro.innerText;
+    let num = screenIntro.textContent;
     let size = num.length
     num = num.slice(0, size - 1)
     if (num == 0) {
@@ -152,8 +190,9 @@ function del() {
     }
 }
 
-function operation(kind) {
+function operator(kind) {
     screenIntro.innerHTML = kind
+    
 }
 
 function clsIntro() {

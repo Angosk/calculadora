@@ -1,16 +1,19 @@
-const screenIntro = document.getElementById('screen')
-const screenAcumulation = document.getElementById('operation')
-const keysSelectionated = document.getElementsByClassName('keys')
 
-function printNumber(digit) {
+//! -Version for pair operations 
+//! -Include the best percentage function 
+
+const screenIntro = document.getElementById('screen')
+const screenAccumulation = document.getElementById('operation')
+
+function printNumber(digit) { //# this moves the first digit to give way to the operation symbol
     if (digit == '+') {
-        screenAcumulation.innerHTML = screenIntro.textContent
+        screenAccumulation.innerHTML = screenIntro.textContent
         operation('+')
     }else if (digit == '×') {
-        screenAcumulation.innerHTML = screenIntro.textContent
+        screenAccumulation.innerHTML = screenIntro.textContent
         operation('×')
     }else if (digit == '÷') {
-        screenAcumulation.innerHTML = screenIntro.textContent
+        screenAccumulation.innerHTML = screenIntro.textContent
         operation('÷')
     }else if (digit == '-') {
         if(
@@ -19,7 +22,7 @@ function printNumber(digit) {
             !screenIntro.textContent.includes('÷') &&
             !screenIntro.textContent.includes('√')
             ) {
-            screenAcumulation.innerHTML = screenIntro.textContent
+            screenAccumulation.innerHTML = screenIntro.textContent
             operation('-')
         }else
             screenIntro.innerHTML += digit;
@@ -56,85 +59,79 @@ function calculation() {
         subs(num)
     }else {
         //TODO  add re calculation 
-        cls()
-        clsOpe()
+        clsIntro()
+        clsAccumulation()
     }
 }
 
 function sum(num) {
-    let first = Number.parseFloat(screenAcumulation.textContent);
+    let first = Number.parseFloat(screenAccumulation.textContent);
     let second = Number.parseFloat(num[1])
-    clsOpe()
-    screenAcumulation.innerHTML = `${first} + ${second} =`
+    clsAccumulation()
+    screenAccumulation.innerHTML = `${first} + ${second} =`
     screenIntro.innerHTML = first + second
 }
 
 function mul(num) {
-    let first = Number.parseFloat(screenAcumulation.textContent);
+    let first = Number.parseFloat(screenAccumulation.textContent);
     let second = Number.parseFloat(num[1])
-    clsOpe()
-    screenAcumulation.innerHTML = `${first} × ${second} =`
+    clsAccumulation()
+    screenAccumulation.innerHTML = `${first} × ${second} =`
     screenIntro.innerHTML = first * second
 }
 
 function div(num) {
-    let first = Number.parseFloat(screenAcumulation.textContent);
+    let first = Number.parseFloat(screenAccumulation.textContent);
     let second = Number.parseFloat(num[1])
-    clsOpe()
-    screenAcumulation.innerHTML = `${first} ÷ ${second} =`
+    clsAccumulation()
+    screenAccumulation.innerHTML = `${first} ÷ ${second} =`
     screenIntro.innerHTML = first / second
 }
 
 function per(num) {
-    console.log(num, 'line 90')
     if (num.includes('-')) {
         num = num.split('-')
         num = num[1].split('%')
-        //*___________________________________________________________________
-        let first = Number.parseFloat(screenAcumulation.textContent);
+        //#_________________________________________Section for subtract a percentage
+        let first = Number.parseFloat(screenAccumulation.textContent);
         let second = Number.parseFloat(num[0])
-        screenAcumulation.innerHTML = `${first} - ${second}%${first} =`
+        screenAccumulation.innerHTML = `${first} - ${second}%${first} =`
         res = (first * second) / 100
         res = first - res
         screenIntro.innerHTML = res
-        //*___________________________________________________________________
-
-        console.log("yata minus")
-        console.log(num)
+        //#____________________________________________________________________________
     }else if (num.includes('+')) {
         num = num.split('+');
         num = num[1].split('%')
-        //*___________________________________________________________________
-        let first = Number.parseFloat(screenAcumulation.textContent);
+        //#_______________________________________________Section for add a percentage
+        let first = Number.parseFloat(screenAccumulation.textContent);
         let second = Number.parseFloat(num[0])
-        screenAcumulation.innerHTML = `${first} + ${second}%${first} =`
+        screenAccumulation.innerHTML = `${first} + ${second}%${first} =`
         res = (first * second) / 100
         res = first + res
         screenIntro.innerHTML = res
-        //*___________________________________________________________________
-        console.log("yata plus")
-        console.log(num)
+        //#_____________________________________________________________________________
     }else{
         num = num.split('%')
         let res = (num[1] * num[0]) / 100
-        screenAcumulation.innerHTML = `${num[0]} % ${num[1]} =`
+        screenAccumulation.innerHTML = `${num[0]} % ${num[1]} =`
         screenIntro.innerHTML = res
     }
     
 }
 
 function subs(num) {
-    let first = Number.parseFloat(screenAcumulation.textContent);
+    let first = Number.parseFloat(screenAccumulation.textContent);
     let second = Number.parseFloat(num[1])
-    clsOpe()
-    screenAcumulation.innerHTML = `${first} - ${second} =`
+    clsAccumulation()
+    screenAccumulation.innerHTML = `${first} - ${second} =`
     screenIntro.innerHTML = first - second
 }
 
 function sr(num) {
     let res = num;
     console.log('res', res[1])
-    screenAcumulation.innerHTML = `√${res[1]}`
+    screenAccumulation.innerHTML = `√${res[1]}`
     if (screenIntro.textContent.includes('-')){
         res = Math.sqrt(Number.parseFloat(Math.abs(res[1])))
         screenIntro.innerHTML = `im ${res}`
@@ -160,10 +157,10 @@ function operation(kind) {
     screenIntro.innerHTML = kind
 }
 
-function cls() {
+function clsIntro() {
     screenIntro.innerHTML = '0'
 }
 
-function clsOpe() {
-    screenAcumulation.innerHTML = '0'
+function clsAccumulation() {
+    screenAccumulation.innerHTML = '0'
 }
