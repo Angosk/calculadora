@@ -20,7 +20,7 @@ function printNumber(digit) {
         // }
         //# If the " - " is used like a negative sing, it can be use only
         //# in +, x, ÷ and √
-        if((/[\+\×\÷\√]/g).test(screenIntro.textContent)) {//? here could add parameters for --
+        if((/[\+\×\÷\√\-]/g).test(screenIntro.textContent)) {//?' here could add parameters for --
             screenIntro.innerHTML += digit;
         }else
             typeOfAction('-')
