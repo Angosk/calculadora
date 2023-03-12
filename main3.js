@@ -20,7 +20,9 @@ function printNumber(digit) {
         // }
         //# If the " - " is used like a negative sing, it can be use only
         //# in +, x, ÷ and √
-        if((/[\+\×\÷\√\-]/g).test(screenIntro.textContent)) {//?' here could add parameters for --
+        if ((/\-/g).test(screenIntro.textContent)){
+            (/[0-9]/g).test(screenIntro.textContent) ? typeOfAction('-') : screenIntro.innerHTML = '-'
+        }else if((/[\+\×\÷\√]/g).test(screenIntro.textContent)) {//? here could add parameters for --
             screenIntro.innerHTML += digit;
         }else
             typeOfAction('-')
@@ -28,7 +30,10 @@ function printNumber(digit) {
         if (!screenIntro.textContent.includes('.')){
             if(screenIntro.textContent == '0') {
                 screenIntro.textContent = '0.'
-            }else if ((/[\+\-\×\÷\√\%]/g).test(screenIntro.textContent)){
+            }else if (
+                (/[\+\-\×\÷\√\%]/g).test(screenIntro.textContent) &&
+                !(/[0-9]/g).test(screenIntro.textContent)
+                ){
                 screenIntro.innerHTML += '0.'
             }else {
                 screenIntro.innerHTML += digit
@@ -50,7 +55,11 @@ function typeOfAction (kind){
     //# NULL in other cases
     const isNumber = screenIntro.textContent.match(/[0-9]/g)
     const isOperator = screenIntro.textContent.match(/[\+\-\×\÷\√\%]/g)
-    if ((/[0-9]/g).test(screenAccumulation.textContent)) {
+
+    if (screenAccumulation.textContent.includes('=')){
+        screenAccumulation.innerHTML = screenIntro.textContent
+        operator(kind)
+    }else if ((/[0-9]/g).test(screenAccumulation.textContent)) {
         if(
             (isOperator ===  null ? true : false) && (isNumber != null ? true : false)){
                 if(screenIntro.textContent == '0'){
@@ -66,13 +75,7 @@ function typeOfAction (kind){
         }else if(
             (isOperator != null ? true : false) && (isNumber != null ? true : false)){
             calculation()
-        }else operator()
-
-    }else if (screenAccumulation.textContent.includes('=')){
-        screenAccumulation.innerHTML = screenIntro.textContent
-        operator(kind)
-    }else {
-        calculation()
+        }
     }
 }
 
