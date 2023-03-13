@@ -58,20 +58,20 @@ function typeOfAction (kind){
 
     if (screenAccumulation.textContent.includes('=')){
         screenAccumulation.innerHTML = screenIntro.textContent
-        operator(kind)
+        kind === '=' ? null : operator(kind)
     }else if ((/[0-9]/g).test(screenAccumulation.textContent)) {
         if(
             (isOperator ===  null ? true : false) && (isNumber != null ? true : false)){
                 if(screenIntro.textContent == '0'){
                     clsIntro()
-                    operator(kind) 
+                    kind === '=' ? null : operator(kind)
                 }else{
                     screenAccumulation.innerHTML = screenIntro.textContent
-                    operator(kind) 
+                    kind === '=' ? null : operator(kind)
                 }
         }else if(
             (isOperator != null ? true : false) && (isNumber === null ? true : false)){
-            operator(kind)
+                kind === '=' ? null : operator(kind)
         }else if(
             (isOperator != null ? true : false) && (isNumber != null ? true : false)){
             calculation()
